@@ -1,6 +1,3 @@
-## Put comments here that give an overall description of what your
-## functions do
-
 # This file defines two functions:
 # - makeCacheMatrix() creates a special "matrix" object that can cache its 
 #   inverse, if any.
@@ -20,11 +17,12 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 # @assume type(x) == CacheMatrix()
+# @assume x is an inversible matrix, so no explicit error handling
 # @return inverse of 'x' (cache if not set)
 cacheSolve <- function(x, ...) {
-  if (is.null(x$getInverse()))
+  if (is.null(x$getInverse()))                         # check if any inverse cached
   {
-    x$setInverse( solve(x$getMatrix(), ...) )
+    x$setInverse( solve(x$getMatrix(), ...) )          # calculate inverse and cache it
   }
-  return (x$getInverse())
+  return (x$getInverse())                              # return inverse
 }
